@@ -9,9 +9,11 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref ,onMounted} from 'vue';
+import { useRouter } from 'vue-router';
+const router = useRouter();
 const navigations = [
-    { name: '首页', url: '/index' },
+    { name: '首页', url: '/' },
     { name: 'API市场', url: '/api-market' },
     { name: '需求大厅', url: '/demand-hall' },
     { name: '关于我们', url: '/about-us' },
@@ -21,7 +23,17 @@ const handlerClick = (item, index) => {
     // 处理点击事件
     activeIndex.value = index;
     console.log(item, index);
+    router.push(item.url);
 }
+onMounted(() => {
+    // 处理初始化选中状态
+    const path = router.currentRoute.value.path;
+    navigations.forEach((item, index) => {
+        if (path === item.url) {
+            activeIndex.value = index;
+        }
+    });
+});
 </script>
 
 <style lang="less"  scoped>
