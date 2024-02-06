@@ -1,7 +1,7 @@
 <template>
   <div class="navigation-container">
     <!-- 导航栏内容 -->
-    <div class="nav" v-for="(item,index) in navigations" :key="index" @click="handlerClick(item, index)" :style="{'is-active': activeIndex ==index}">
+    <div class="nav" v-for="(item,index) in navigations" :key="index" @click="handlerClick(item, index)" :class="{'is-active': activeIndex ==index}">
         <span class="label">{{ item.name }}</span>
     </div>
 
@@ -41,6 +41,11 @@ const handlerClick = (item, index) => {
 
 .nav:hover{
     cursor: pointer;
+    .label::after {
+        transform: scaleX(0.95);
+    }
+}
+.is-active{
     .label::after {
         transform: scaleX(0.95);
     }
