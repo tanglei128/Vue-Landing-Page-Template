@@ -1,17 +1,23 @@
 import { createRouter, createWebHistory } from 'vue-router'
 // import HomeView from '../views/HomeView.vue'
-import HomePage from '../views/homepage/HomePage.vue'
+import index from '../views/homepage/index.vue'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/',
-      name: 'homepage',
+      name: 'index',
       meta: {
-        title: 'Home'
+        title: '首页'
       },
-      component: HomePage,
+      component: index,
+      redirect: '/homepage',
       children: [
+        {
+          path: '/homepage',
+          name: 'homepage',
+          component: () => import('../views/homepage/Homepage.vue')
+        },
         {
           path: '/api-market',
           name: 'ApiMarket',
